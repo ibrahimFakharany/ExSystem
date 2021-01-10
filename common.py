@@ -7,6 +7,10 @@ import json
 conn = Database_connection().cnxn
 cur = conn.cursor()
 
+@app.route('/table_names')
+def getTableNames():
+    return jsonify({'status': 200 ,'result': Database_connection().engine.table_names()})
+
 @app.route('/getTableIdentity/<string:tableName>')
 def getTableIdentity(tableName):
     query = 'EXEC GET_TABLE_IDENTITY '+tableName

@@ -7,11 +7,6 @@ import json
 conn = Database_connection().cnxn
 cur = conn.cursor()
 
-@app.route('/table_names')
-def getTableNames():
-    return jsonify({'status': 200 ,'result': Database_connection().engine.table_names()})
-
-
 @app.route('/get_courses')
 def getCourses():
     query = 'Exec get_courses '
@@ -20,7 +15,6 @@ def getCourses():
     r = [dict((cur.description[i][0], str(value))
               for i, value in enumerate(row)) for row in cur.fetchall()]
     return jsonify({'status': 200 ,'result': r})
-
 
 @app.route('/add_course', methods=['POST'])
 def addCourse():
@@ -63,7 +57,6 @@ def updateCourse():
     else :
         return jsonify({'status':500, 'message': 'undefined json request'})
     
-
 @app.route('/delete_course/<int:courseId>', methods=['delete'])
 def removeCourse(courseId):
     query = 'EXEC delete_course ' +str(courseId)
