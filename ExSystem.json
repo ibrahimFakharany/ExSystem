@@ -1,0 +1,324 @@
+{
+	"info": {
+		"_postman_id": "371a3297-2863-44d4-aae0-8bc98f198157",
+		"name": "ExaminationSystem",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "getCourses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root_url}}/get_courses",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"get_courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCourse",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"crs_id\": 1,\r\n    \"topic_id\":4,\r\n    \"crs_name\":\"PYTHON\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root_url}}/update_course",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"update_course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCourse",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"Topic_id\":5,\r\n\"course_name\":\"vfx\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root_url}}/add_course",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"add_course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_table_names",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root_url}}/table_names",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"table_names"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Topic",
+			"item": [
+				{
+					"name": "{{root_url}}/get_topics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{root_url}}/get_topics",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"get_topics"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Question",
+			"item": [
+				{
+					"name": "add_question",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"course_id\" : 2,\r\n    \"question\" : \"Database is an organized collection of related\",\r\n    \"question_type\" : \"MCQ\",\r\n    \"answer\" : \"Ans_A\",\r\n    \"ans_a\": \"Data\",\r\n    \"ans_b\" : \"Modules\",\r\n    \"ans_c\" : \"Programs\",\r\n    \"ans_d\" : \"None of the above\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root_url}}/add_question",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"add_question"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_exam",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"course_id\":2,\r\n    \"TF\":3,\r\n    \"MCQ\":7,\r\n    \"date\":\"enter the date here\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root_url}}/generate_exam",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"generate_exam"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store_students_questions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exam_id\":25, \r\n    \"student_id\":5,  \r\n    \"ans_1\":\"Ans_A\",\r\n    \"ans_2\":\"Ans_B\",\r\n    \"ans_3\":\"Ans_D\",\r\n    \"ans_4\":\"Ans_C\",\r\n    \"ans_5\":\"Ans_D\",\r\n    \"ans_6\":\"Ans_D\",\r\n    \"ans_7\":\"Ans_A\",\r\n    \"ans_8\":\"Ans_A\",\r\n    \"ans_9\":\"Ans_C\",\r\n    \"ans_10\":\"Ans_A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root_url}}/store_students_questions",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"store_students_questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_questions_exam",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exam_id\": 26\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root_url}}/get_exam_questions",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"get_exam_questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "correct_student_answers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exam_id\":25, \r\n    \"student_id\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root_url}}/correct_student_exam",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"correct_student_exam"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "common",
+			"item": [
+				{
+					"name": "getTableIdentity",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root_url}}/get_topics",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"get_topics"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "root_url",
+			"value": "http://127.0.0.1:5000/"
+		}
+	]
+}
