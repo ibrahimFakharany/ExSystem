@@ -7,4 +7,5 @@ if __name__ == "__main__":
     from CourseViews import *
     from common import *
     from TopicViews import *
+    from QuestionsViews import * 
     app.run(debug=True)
