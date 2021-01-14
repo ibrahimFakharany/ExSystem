@@ -3,11 +3,13 @@ from flask_restful import Resource, reqparse, fields, marshal_with
 from flask import request, jsonify
 from app import app
 import json
+from Authentication import token_required
 
 conn = Database_connection().cnxn
 cur = conn.cursor()
 
 @app.route('/add_question', methods=['POST'])
+@token_required
 def addQuestion():
     input_json = request.get_json(force=True)
     courseId= input_json['course_id']
@@ -22,7 +24,6 @@ def addQuestion():
         ans_B = input_json['ans_b']
         ans_C = input_json['ans_c']
         ans_D = input_json['ans_d']
-        print('the question is MCQ')
         query +=','+ '\'' + ans_A + '\'' + ',' + '\'' + ans_B + '\'' + ',' + '\'' + ans_C + '\'' + ',' + '\'' + ans_D + '\''
 
     r = cur.execute(query)
@@ -31,6 +32,7 @@ def addQuestion():
 
 
 @app.route('/generate_exam', methods=['POST'])
+@token_required
 def generateExam():
     input_json = request.get_json(force=True)
     courseId= input_json['course_id']
@@ -39,13 +41,14 @@ def generateExam():
     query = 'EXEC generate_exam ' +str(courseId)+','+ str(TF)+ ','+str(MCQ)
     if 'date' in input_json:
         examExam= input_json['date']
-        query = ','+'\''+examExam+'\''
+        query = ','+'\"'+examExam+'\"'
 
     r = cur.execute(query)
     conn.commit()
     return jsonify({'status': 200, "message":"added"})
     
 @app.route('/get_exam_questions', methods=['GET'])
+@token_required
 def getQuestionsByExamId():
     input_json = request.get_json(force=True)
     examId = input_json['exam_id']
@@ -57,6 +60,7 @@ def getQuestionsByExamId():
 
 
 @app.route('/store_students_questions', methods=['POST'])
+@token_required
 def storeStudentAnswer():
     input_json = request.get_json(force=True)
     examId = input_json['exam_id']
@@ -83,6 +87,7 @@ def storeStudentAnswer():
     return jsonify({'status': 200, "result":"added"})
 
 @app.route('/correct_student_exam', methods=['POST'])
+@token_required
 def correctStudentAnswers():
     input_json = request.get_json(force=True)
     examId = input_json['exam_id']

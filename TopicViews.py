@@ -3,13 +3,14 @@ from flask_restful import Resource, reqparse, fields, marshal_with
 from flask import request, jsonify
 from app import app
 import json
-
+from Authentication import token_required
 
 conn = Database_connection().cnxn
 cur = conn.cursor()
 
 
 @app.route('/get_topics')
+@token_required
 def getTopics():
     query = 'EXEC get_topics'
     cur.execute(query)
