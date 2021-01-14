@@ -81,7 +81,7 @@ def storeStudentAnswer():
             ans_5 + '\'' + ',' + '\'' + ans_6 + '\'' + ',' + '\'' + ans_7 + '\'' + ',' + '\'' + \
                 ans_8 + '\'' + ',' + '\'' +\
                 ans_9 + '\''+ ',' + '\'' + ans_10 + '\''
-
+    correctStudentAnswers()
     cur.execute(query)
     conn.commit()
     return jsonify({'status': 200, "result":"added"})
