@@ -40,8 +40,8 @@ def generateExam():
     MCQ= input_json['MCQ']
     query = 'EXEC generate_exam ' +str(courseId)+','+ str(TF)+ ','+str(MCQ)
     if 'date' in input_json:
-        examExam= input_json['date']
-        query = ','+'\"'+examExam+'\"'
+        examDate= input_json['date']
+        query += ','+'\''+examDate+'\''
 
     r = cur.execute(query)
     conn.commit()
@@ -96,4 +96,3 @@ def correctStudentAnswers():
     cur.execute(query)
     conn.commit()
     return jsonify({'status': 200, "result":"corrected"})
-

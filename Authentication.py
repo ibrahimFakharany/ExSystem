@@ -43,7 +43,7 @@ def loginUser():
     cur.execute(query)
     row = cur.fetchone()
     r =  dict((cur.description[i][0], str(value)) for i, value in enumerate(row)) 
-    token = jwt.encode({'userId' : r['Id'], 'exp' : datetime.datetime.utcnow() + datetime.timedelta(seconds=15)}, app.config['SECRET_KEY'])
+    token = jwt.encode({'userId' : r['Id'], 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=15)}, app.config['SECRET_KEY'])
     
     return jsonify({'status': 200 ,'token': token})
     
