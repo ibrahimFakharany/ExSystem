@@ -8,7 +8,6 @@ conn = Database_connection().cnxn
 cur = conn.cursor()
 
 @app.route('/get_courses')
-@token_required
 def getCourses():
     query = 'Exec get_courses '
     
@@ -18,7 +17,6 @@ def getCourses():
     return jsonify({'status': 200 ,'result': r})
 
 @app.route('/add_course', methods=['POST'])
-@token_required
 def addCourse():
     input_json = request.get_json(force=True)
     topic_id = input_json['Topic_id']
@@ -31,7 +29,6 @@ def addCourse():
     return jsonify({'status': 200, "message":"added"})
 
 @app.route('/update_course', methods=['POST'])
-@token_required
 def updateCourse():
 
     if request.is_json:
@@ -61,7 +58,6 @@ def updateCourse():
         return jsonify({'status':500, 'message': 'undefined json request'})
     
 @app.route('/delete_course/<int:courseId>', methods=['delete'])
-@token_required
 def removeCourse(courseId):
     query = 'EXEC delete_course ' +str(courseId)
     cur.execute(query)
