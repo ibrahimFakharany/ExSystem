@@ -18,9 +18,8 @@ def getStudents():
     return jsonify({'status': 200, 'result': r})
 
 
-@app.route('/students_courses/<studentId>')
-def coursesOfStudent():
-    studentId = requests.args['studentId']
+@app.route('/students_courses/<int:studentId>')
+def coursesOfStudent(studentId):
     query = 'Exec GET_COURSES_BY_STUDENT ' + str(studentId)
     cur.execute(query)
     r = [dict((cur.description[i][0], str(value))

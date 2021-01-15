@@ -9,7 +9,6 @@ conn = Database_connection().cnxn
 cur = conn.cursor()
 
 @app.route('/add_question', methods=['POST'])
-@token_required
 def addQuestion():
     input_json = request.get_json(force=True)
     courseId= input_json['course_id']
@@ -32,7 +31,6 @@ def addQuestion():
 
 
 @app.route('/generate_exam', methods=['POST'])
-@token_required
 def generateExam():
     input_json = request.get_json(force=True)
     courseId= input_json['course_id']
@@ -48,7 +46,6 @@ def generateExam():
     return jsonify({'status': 200, "message":"added"})
     
 @app.route('/get_exam_questions', methods=['GET'])
-@token_required
 def getQuestionsByExamId():
     input_json = request.get_json(force=True)
     examId = input_json['exam_id']
