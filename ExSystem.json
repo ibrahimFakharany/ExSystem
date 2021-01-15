@@ -175,10 +175,16 @@
 					"name": "create_exam",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "x-access-tokens",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxIiwiZXhwIjoxNjEwNzI0MTkzfQ.AXrFaNyZ07xWWGdB4RxkwS4ol9qG9ew6XylU6XD5Px0",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"course_id\":2,\r\n    \"TF\":3,\r\n    \"MCQ\":7,\r\n    \"date\":\"enter the date here\"\r\n}",
+							"raw": "{\r\n    \"course_id\":2,\r\n    \"TF\":3,\r\n    \"MCQ\":7,\r\n    \"date\":\"1996-12-01\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
