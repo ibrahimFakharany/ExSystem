@@ -60,7 +60,6 @@ def getQuestionsByExamId():
 
 
 @app.route('/store_students_questions', methods=['POST'])
-@token_required
 def storeStudentAnswer():
     input_json = request.get_json(force=True)
     examId = input_json['exam_id']
@@ -87,7 +86,6 @@ def storeStudentAnswer():
     return jsonify({'status': 200, "result":"added"})
 
 @app.route('/correct_student_exam', methods=['POST'])
-@token_required
 def correctStudentAnswers():
     input_json = request.get_json(force=True)
     examId = input_json['exam_id']
