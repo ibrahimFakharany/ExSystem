@@ -96,3 +96,4 @@ def correctStudentAnswers():
     cur.execute(query)
     conn.commit()
     return jsonify({'status': 200, "result":"corrected"})
+

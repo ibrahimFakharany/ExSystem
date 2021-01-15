@@ -51,7 +51,7 @@ def updateCourse():
         if 'crs_name' in input_json:
             crsName = input_json['crs_name']
             query += '\''+crsName+'\''
-        print('*********************'+query)
+        
         query = 'EXEC update_course '+query
         cur.execute(query)
         conn.commit()
@@ -68,3 +68,11 @@ def removeCourse(courseId):
     conn.commit()
     return jsonify({"message":"removed"})
 
+
+@app.route('/exams_of_students/<int:courseId>')
+def getExamOfCourses():
+    query = 'EXEC GET_EXAMS_BY_COURSE_ID ' + str(courseId)
+    cur.execute(query)
+    r = [dict((cur.description[i][0], str(value))
+              for i, value in enumerate(row)) for row in cur.fetchall()]
+    return jsonify({'status': 200 ,'result': r})    
