@@ -359,6 +359,46 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "GetAllStudents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{root_url}}/students",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCoursesOfStudents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{root_url}}/students_courses/1",
+							"host": [
+								"{{root_url}}"
+							],
+							"path": [
+								"students_courses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"variable": [
