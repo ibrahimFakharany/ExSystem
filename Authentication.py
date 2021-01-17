@@ -42,6 +42,9 @@ def loginUser():
     query = 'EXEC loginUser '+'\''+username+'\''+','+'\''+password +'\''+','+ '\''+loginType+'\''
     cur.execute(query)
     row = cur.fetchone()
+    if row is None:
+        return jsonify({'status': 401 ,'message': 'username or password is incorrect'})
+
     r =  dict((cur.description[i][0], str(value)) for i, value in enumerate(row)) 
     token = jwt.encode({'userId' : r['Id'], 'exp' : datetime.datetime.utcnow() + datetime.timedelta(hours=24)}, app.config['SECRET_KEY'])
     
