@@ -9,6 +9,6 @@ if __name__ == "__main__":
     from common import *
     from TopicViews import *
     from QuestionsViews import * 
-    # from Authentication import * 
+    from Authentication import * 
     from StudentViews import *
     app.run(debug=True)

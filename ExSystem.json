@@ -207,10 +207,16 @@
 					"name": "store_students_questions",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "x-access-tokens",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxIiwiZXhwIjoxNjExMDAyODg4fQ.1bMikXFnHHd8_rb3tK_w51GnAt8OO75sEcG_cs3Mq-w",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"exam_id\":25, \r\n    \"student_id\":5,  \r\n    \"ans_1\":\"Ans_A\",\r\n    \"ans_2\":\"Ans_B\",\r\n    \"ans_3\":\"Ans_D\",\r\n    \"ans_4\":\"Ans_C\",\r\n    \"ans_5\":\"Ans_D\",\r\n    \"ans_6\":\"Ans_D\",\r\n    \"ans_7\":\"Ans_A\",\r\n    \"ans_8\":\"Ans_A\",\r\n    \"ans_9\":\"Ans_C\",\r\n    \"ans_10\":\"Ans_A\"\r\n}",
+							"raw": "{\r\n    \"exam_id\":25,  \r\n    \"ans_1\":\"Ans_A\",\r\n    \"ans_2\":\"Ans_B\",\r\n    \"ans_3\":\"Ans_D\",\r\n    \"ans_4\":\"Ans_C\",\r\n    \"ans_5\":\"Ans_D\",\r\n    \"ans_6\":\"Ans_D\",\r\n    \"ans_7\":\"Ans_A\",\r\n    \"ans_8\":\"Ans_A\",\r\n    \"ans_9\":\"Ans_C\",\r\n    \"ans_10\":\"Ans_A\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -325,11 +331,8 @@
 			"item": [
 				{
 					"name": "loginUser",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "x-access-tokens",

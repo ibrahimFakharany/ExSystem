@@ -3,7 +3,7 @@ from flask_restful import Resource, reqparse, fields, marshal_with
 from flask import request, jsonify
 from app import app
 import json
-from Authentication import token_required
+# from Authentication import token_required
 conn = Database_connection().cnxn
 cur = conn.cursor()
 
@@ -65,9 +65,9 @@ def removeCourse(courseId):
     return jsonify({"message":"removed"})
 
 
-@app.route('/exams_of_students/<int:courseId>')
-def getExamOfCourses():
-    query = 'EXEC GET_EXAMS_BY_COURSE_ID ' + str(courseId)
+@app.route('/exams_of_students/<int:courseId>/<int:studentId>')
+def getExamOfCourses(courseId, studentId):
+    query = 'EXEC GET_EXAMS_BY_COURSE_ID ' + str(courseId) + ',' + str(studentId)
     cur.execute(query)
     r = [dict((cur.description[i][0], str(value))
               for i, value in enumerate(row)) for row in cur.fetchall()]

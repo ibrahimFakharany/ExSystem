@@ -3,6 +3,7 @@ from flask_restful import Resource, reqparse, fields, marshal_with
 from flask import request, jsonify
 from app import app
 import json
+from time import sleep
 from Authentication import token_required
 
 conn = Database_connection().cnxn
@@ -44,23 +45,21 @@ def generateExam():
     r = cur.execute(query)
     conn.commit()
     return jsonify({'status': 200, "message":"added"})
-    
-@app.route('/get_exam_questions', methods=['GET'])
-def getQuestionsByExamId():
-    input_json = request.get_json(force=True)
-    examId = input_json['exam_id']
-    query = 'EXEC GetQuestionsByExamId ' + str(examId)
+
+@app.route('/get_exam_questions/<int:exam_id>', methods=['GET'])
+def getQuestionsByExamId(exam_id):
+    query = 'EXEC GetQuestionsByExamId ' + str(exam_id)
     cur.execute(query)
     r = [dict((cur.description[i][0], str(value))
               for i, value in enumerate(row)) for row in cur.fetchall()]
     return jsonify({'status': 200, "result":r})
 
-
 @app.route('/store_students_questions', methods=['POST'])
-def storeStudentAnswer():
+@token_required
+def storeStudentAnswer(data):
     input_json = request.get_json(force=True)
     examId = input_json['exam_id']
-    studentId = input_json['student_id']
+    studentId = data['userId']
     ans_1 = input_json['ans_1']
     ans_2 = input_json['ans_2']
     ans_3 = input_json['ans_3']
@@ -71,16 +70,23 @@ def storeStudentAnswer():
     ans_8 = input_json['ans_8']
     ans_9 = input_json['ans_9']
     ans_10 = input_json['ans_10']
-
     query = 'EXEC InsertStudentAnswers ' + str(examId) + ',' + str(studentId) + ',' + '\'' +\
         ans_1 + '\'' + ',' + '\'' + ans_2 + '\'' + ',' + '\'' + ans_3 + '\'' + ',' + '\'' + ans_4 + '\'' + ',' + '\'' +\
-            ans_5 + '\'' + ',' + '\'' + ans_6 + '\'' + ',' + '\'' + ans_7 + '\'' + ',' + '\'' + \
-                ans_8 + '\'' + ',' + '\'' +\
-                ans_9 + '\''+ ',' + '\'' + ans_10 + '\''
-    correctStudentAnswers()
+        ans_5 + '\'' + ',' + '\'' + ans_6 + '\'' + ',' + '\'' + ans_7 + '\'' + ',' + '\'' + \
+        ans_8 + '\'' + ',' + '\'' +\
+        ans_9 + '\''+ ',' + '\'' + ans_10 + '\';'
     cur.execute(query)
     conn.commit()
-    return jsonify({'status': 200, "result":"added"})
+    sleep(1)
+    query = 'EXEC ExamCorrection ' + str(examId) + ',' + str(studentId) + ';'
+    cur.execute(query)
+    conn.commit()
+    sleep(1)
+    query = 'EXEC GET_STUDENT_GRADE ' + str(examId) + ',' + str(studentId) + ';'
+    cur.execute(query)
+    row = cur.fetchone()
+    r =  dict((cur.description[i][0], str(value)) for i, value in enumerate(row)) 
+    return jsonify({'status': 200, "result":r})
 
 @app.route('/correct_student_exam', methods=['POST'])
 def correctStudentAnswers():
